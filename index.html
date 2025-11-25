@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ali Hasanov — Game Dev Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --panel: #121212;
+      --muted: #bfc7cc;
+      --accent: #00adb5;
+      --accent-2: #00969d;
+      --glass: rgba(18, 18, 18, 0.85);
+      --card: #1a1a1a;
+      --radius: 12px;
+      --max-width: 1100px;
+      --ease: cubic-bezier(.2, .9, .3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      background: linear-gradient(180deg, var(--bg), #0b0b0b 60%);
+      color: #e8eef0;
+      font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+      line-height: 1.6;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; height: auto; }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.25rem;
+      background: var(--glass);
+      backdrop-filter: blur(8px) saturate(120%);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+	
+	.logo { 
+    width: 44px; 
+    height: 44px; 
+    border-radius: 10px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; /* This ensures horizontal centering */
+    background: linear-gradient(135deg, var(--accent), var(--accent-2)); 
+    box-shadow: 0 6px 18px rgba(0, 173, 181, 0.12); 
+    font-weight: 800; 
+    color: #041014; 
+    font-size: 1.05rem;
+    text-align: center; /* Added for extra centering */
+
+	}
+
+
+    .nav-links {
+      display: flex;
+      gap: 1.4rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      padding: .35rem .2rem;
+      font-weight: 600;
+      color: var(--muted);
+      position: relative;
+      border-radius: 6px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      border-radius: 2px;
+      bottom: -10px;
+      background: transparent;
+      transition: all .22s var(--ease);
+      transform: translateY(4px);
+      opacity: 0;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a.active { color: #fff; }
+    .nav-links a.active:after {
+      background: var(--accent);
+      opacity: 1;
+      transform: none;
+      bottom: -6px;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--muted);
+    }
+
+    .hamburger button {
+      background: none;
+      border: none;
+      color: inherit;
+      font-size: 1.25rem;
+      padding: .35rem;
+      border-radius: 8px;
+    }
+
+    main { padding-top: 45px; }
+
+    /* Header */
+    header {
+      padding: 6.25rem 1rem 4.25rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .intro {
+      display: inline-block;
+      text-align: center;
+      padding: 2rem 2.5rem;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      border: 1px solid rgba(255, 255, 255, 0.02);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    header h1 {
+      margin: 0;
+      font-weight: 800;
+      font-size: 2.6rem;
+      background: linear-gradient(90deg, var(--accent), #7af7e8 120%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.01em;
+    }
+
+    header h1 small {
+      display: block;
+      font-size: .9rem;
+      color: var(--muted);
+      font-weight: 600;
+      margin-top: .35rem;
+    }
+
+   .typing {
+        display: inline-block;
+        border-right: 2px solid var(--accent);
+        padding-right: .25rem;
+        white-space: nowrap;
+        overflow: hidden;
+        vertical-align: middle;
+        height: 1.5rem;
+
+    }
+
+    header .meta {
+      margin-top: .75rem;
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Sections */
+    section {
+      max-width: var(--max-width);
+      margin: 3rem auto;
+      padding: 0 1.25rem;
+	  scroll-margin-top: 88px;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      font-weight: 700;
+      border-left: 4px solid var(--accent);
+      padding-left: .9rem;
+      padding-right: .6rem;
+      background: transparent;
+      border-radius: 8px;
+    }
+    
+    h9 {
+      font-size: 1.6rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      font-weight: 700;
+      padding-left: .9rem;
+      padding-right: .6rem;
+      background: transparent;
+
+    }
+    
+
+    /* About */
+    #about p {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.02));
+      padding: 1.4rem;
+      border-radius: 12px;
+      color: var(--muted);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Projects */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.4rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.6);
+      transition: transform .36s var(--ease), box-shadow .36s var(--ease);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 173, 181, 0.12);
+    }
+
+    .card img {
+      height: 165px;
+      object-fit: cover;
+      width: 100%;
+      transition: transform .6s var(--ease);
+    }
+
+    .card:hover img { transform: scale(1.06); }
+
+    .card-content {
+      padding: 1rem 1rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+      flex: 1;
+    }
+
+    .card-content h3 {
+      margin: 0;
+      color: var(--accent);
+      font-size: 1.05rem;
+    }
+
+    .card-content p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .96rem;
+      flex: 1;
+    }
+
+    .card-meta {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-top: .6rem;
+    }
+
+    .badge {
+      font-size: .78rem;
+      padding: .28rem .48rem;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.25);
+      color: var(--muted);
+      border: 1px solid rgba(255, 255, 255, 0.02);
+    }
+
+    .card-actions {
+      display: flex;
+      gap: .6rem;
+      margin-top: 0.6rem;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all .28s var(--ease);
+    }
+
+    .card:hover .card-actions {
+      opacity: 1;
+      transform: none;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .5rem .7rem;
+      border-radius: 8px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #041014;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(0, 173, 181, 0.12);
+      text-decoration: none;
+      font-size: .88rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 22px rgba(0, 173, 181, 0.2);
+    }
+
+    .btn.secondary {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--muted);
+      box-shadow: none;
+    }
+
+    .btn.secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+    }
+
+    .btn.icon { padding: .45rem .6rem; }
+
+    /* Contact Section - Redesigned */
+    #contact {
+      padding: 2.5rem;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.03));
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      margin: 4rem auto;
+      max-width: 800px;
+    }
+    
+    .scroll-top-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #041014;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 173, 181, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.4s var(--ease);
+      z-index: 1000;
+    }
+
+    .scroll-top-btn.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .scroll-top-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 173, 181, 0.4);
+    }
+
+    .contact-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-lead {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .contact-methods {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #041014;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 16px rgba(0, 173, 181, 0.15);
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(0, 173, 181, 0.25);
+    }
+
+    .contact-btn.secondary {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+      box-shadow: none;
+    }
+
+    .contact-btn.secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 2rem;
+      padding: 1.6rem 1rem;
+      color: #88939a;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.02);
+    }
+    
+    html, body {
+      background: linear-gradient(180deg, var(--bg), #0b0b0b 60%) fixed;
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+
+	
+	  body::after {
+      content: '';
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(180deg, var(--bg), #0b0b0b 60%);
+      z-index: -1;
+      pointer-events: none;
+    } 
+
+    /* Custom Upwork icon */
+    .fa-upwork, .fa-brands.fa-upwork {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.838-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.703 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.22-1.834-2.148-4.036-2.687-5.892H7.828v7.112c-.002 1.406-1.141 2.548-2.547 2.548-1.406 0-2.544-1.143-2.544-2.548V3.492H0v7.112c0 2.914 2.37 5.284 5.281 5.284 2.913 0 5.283-2.37 5.283-5.284v-1.569c.529 1.107 1.182 2.229 1.974 3.221l-1.673 7.873h2.797l1.213-5.71c1.063.679 2.285 1.109 3.686 1.109 3 0 5.439-2.452 5.439-5.45 0-3-2.439-5.439-5.439-5.439z' fill='%23bfc7cc'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      vertical-align: -0.125em;
+    }
+
+    .contact-btn.secondary:hover .fa-upwork,
+    .contact-btn.secondary:hover .fa-brands.fa-upwork {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.838-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.703 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.22-1.834-2.148-4.036-2.687-5.892H7.828v7.112c-.002 1.406-1.141 2.548-2.547 2.548-1.406 0-2.544-1.143-2.544-2.548V3.492H0v7.112c0 2.914 2.37 5.284 5.281 5.284 2.913 0 5.283-2.37 5.283-5.284v-1.569c.529 1.107 1.182 2.229 1.974 3.221l-1.673 7.873h2.797l1.213-5.71c1.063.679 2.285 1.109 3.686 1.109 3 0 5.439-2.452 5.439-5.45 0-3-2.439-5.439-5.439-5.439z' fill='%23ffffff'/%3E%3C/svg%3E");
+    }
+
+    /* Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      header h1 { font-size: 2.1rem; }
+      .card img { height: 150px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      nav { padding: .6rem .9rem; }
+      header { padding: 5.5rem 1rem 3rem; }
+      .intro { padding: 1.1rem 1.4rem; }
+      .brand .logo { width: 40px; height: 40px; }
+      .typing { min-width: 10ch; }
+      
+      #contact {
+        padding: 1.5rem;
+        margin: 3rem auto;
+      }
+      
+      .contact-methods {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .contact-btn {
+        width: 100%;
+        max-width: 250px;
+        justify-content: center;
+      }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+      .reveal { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav role="navigation" aria-label="Primary">
+    <div class="brand" aria-hidden="false">
+    <div class="logo" aria-hidden="true">A|H</div>
+      <div>
+        <div style="font-weight:800">aligorithm</div>
+        <div style="font-size:0.95rem;color:var(--muted)">.xyz</div>
+      </div>
+    </div>
+
+    <div class="nav-links" id="navLinks" role="menu">
+      <a href="#about" data-target="about" class="nav-link">About</a>
+      <a href="#projects" data-target="projects" class="nav-link">Projects</a>
+      <a href="#contact" data-target="contact" class="nav-link">Contact</a>
+    </div>
+
+    <div class="hamburger" id="hamburger" aria-hidden="false">
+      <button id="menuBtn" aria-expanded="false" aria-controls="navLinks">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+        <span class="sr-only">Menu</span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <header>
+      <div class="intro reveal" id="intro">
+        <h1>Ali Hasanov</h1>
+        <div class="meta" style="margin-top:.8rem">
+          <div class="typing-container" style="display: inline-block; height: 1.5rem;">
+            <span class="typing" id="typing" aria-live="polite"></span>
+          </div>
+          <div style="margin-top:2.5rem;color:var(--muted);font-size:.98rem">
+            I build games and systems from scratch in Unity &amp; Construct 3 — focusing on feel, polish and player-first design.
+          </div>
+		  <div style="margin-top:2.5rem;">
+  <a class="btn" href="https://www.upwork.com/freelancers/~0127f767d0b3460429?mp_source=share" target="_blank" rel="noopener">
+    Work with Me
+  </a>
+</div>
+        </div>
+      </div>
+    </header>
+
+    <section id="about" class="reveal">
+      <h2>About Me</h2>
+      <p>
+        I'm a passionate game developer with 10 years of experience creating immersive, story-rich experiences.
+        I specialize in gameplay systems, level design, and cinematic interactions using Unity and Construct 3.
+        My work focuses on blending mechanics with emotional storytelling to create memorable adventures.
+      </p>
+    </section>
+
+    <section id="projects" class="reveal">
+      <h2>Projects</h2>
+      <div class="projects" aria-live="polite">
+        <article class="card reveal" aria-labelledby="proj1-title">
+          <img src="https://picsum.photos/seed/echo/900/600" alt="Echoes of Time screenshot" loading="lazy" width="900" height="600">
+          <div class="card-content">
+            <h3 id="proj1-title">Echoes of Time</h3>
+            <p>A puzzle-adventure about timelines and choices — layered narrative with environmental puzzles.</p>
+            <div class="card-meta">
+              <span class="badge">Unity</span>
+              <span class="badge">Puzzle</span>
+              <span class="badge">Narrative</span>
+            </div>
+            <div class="card-actions" aria-hidden="false">
+              <a class="btn" href="#" aria-label="View Echoes of Time demo (example)" onclick="openDemo(event,'Echoes of Time')">
+                <i class="fas fa-play"></i> Demo
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal" aria-labelledby="proj2-title">
+          <img src="https://picsum.photos/seed/neon/900/600" alt="Neon Skies screenshot" loading="lazy" width="900" height="600">
+          <div class="card-content">
+            <h3 id="proj2-title">Neon Skies</h3>
+            <p>A cyberpunk platformer — fast movement, tight combat and synthwave aesthetics.</p>
+            <div class="card-meta">
+              <span class="badge">Unity</span>
+              <span class="badge">Platformer</span>
+              <span class="badge">Action</span>
+            </div>
+            <div class="card-actions">
+              <a class="btn" href="#" onclick="openDemo(event,'Neon Skies')">
+                <i class="fas fa-play"></i> Demo
+              </a>
+
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal" aria-labelledby="proj3-title">
+          <img src="https://picsum.photos/seed/whisper/900/600" alt="Whispering Woods screenshot" loading="lazy" width="900" height="600">
+          <div class="card-content">
+            <h3 id="proj3-title">Whispering Woods</h3>
+            <p>A narrative RPG set in an enchanted forest — branching choices & character-driven quests.</p>
+            <div class="card-meta">
+              <span class="badge">Unreal</span>
+              <span class="badge">RPG</span>
+              <span class="badge">Narrative</span>
+            </div>
+            <div class="card-actions">
+              <a class="btn" href="#" onclick="openDemo(event,'Whispering Woods')">
+                <i class="fas fa-play"></i> Demo
+              </a>
+
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal" aria-labelledby="proj4-title">
+          <img src="https://picsum.photos/seed/solar/900/600" alt="Solar Drift screenshot" loading="lazy" width="900" height="600">
+          <div class="card-content">
+            <h3 id="proj4-title">Solar Drift</h3>
+            <p>Space survival with resource management and emergent exploration systems.</p>
+            <div class="card-meta">
+              <span class="badge">Unity</span>
+              <span class="badge">Survival</span>
+              <span class="badge">Exploration</span>
+            </div>
+            <div class="card-actions">
+              <a class="btn" href="#" onclick="openDemo(event,'Solar Drift')">
+                <i class="fas fa-play"></i> Demo
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal" aria-labelledby="proj5-title">
+          <img src="https://picsum.photos/seed/shadow/900/600" alt="Shadow Realm screenshot" loading="lazy" width="900" height="600">
+          <div class="card-content">
+            <h3 id="proj5-title">Shadow Realm</h3>
+            <p>A dark fantasy roguelike — procedural dungeons and high-risk decisions.</p>
+            <div class="card-meta">
+              <span class="badge">Roguelike</span>
+              <span class="badge">Procedural</span>
+              <span class="badge">Combat</span>
+            </div>
+            <div class="card-actions">
+              <a class="btn" href="#" onclick="openDemo(event,'Shadow Realm')">
+                <i class="fas fa-play"></i> Demo
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="reveal" aria-labelledby="contact-title">
+      <h9 id="contact-title">Contact</h9>
+      <div class="contact-container">
+        <div class="contact-info">
+          <p class="contact-lead">
+            Let's create something amazing together. Whether it's a prototype, contract work, or an idea you want to explore — reach out.
+          </p>
+          
+          <div class="contact-methods">
+            <a class="contact-btn" href="mailto:aligorithmz@gmail.com" aria-label="Email Ali">
+              <i class="fas fa-envelope"></i> Email Me
+            </a>
+            <a class="contact-btn secondary" href="https://www.upwork.com/freelancers/~0127f767d0b3460429?mp_source=share" target="_blank" rel="noopener" aria-label="Upwork (opens in new tab)">
+              <i class="fa-brands fa-upwork"></i> Upwork
+            </a>
+            <a class="contact-btn secondary" href="https://www.linkedin.com/in/alihasanov/" target="_blank" rel="noopener" aria-label="LinkedIn (opens in new tab)">
+              <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> Ali Hasanov — aligorithm.xyz</div>
+    </footer>
+  </main>
+
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+// Improved typing animation with proper cursor positioning
+(function typing() {
+  const el = document.getElementById('typing');
+  const roles = [
+    'Indie Game Developer',
+    'Unity & Construct 3 Specialist',
+	'Gameplay Systems Designer',	
+    'Top-Rated Freelancer'
+    
+  ];
+  
+  // Respect reduced motion preference
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    el.textContent = roles[0];
+    el.style.borderRight = 'none';
+    return;
+  }
+  
+  let i = 0, k = 0, deleting = false;
+  let currentText = '';
+  
+  function tick() {
+    currentText = roles[i];
+    
+    if (!deleting && k <= currentText.length) {
+      el.textContent = currentText.substring(0, k);
+      k++;
+      setTimeout(tick, 100);
+    } else if (!deleting) {
+      deleting = true;
+      setTimeout(tick, 1500);
+    } else if (deleting && k > 0) {
+      // Properly reduce text content during deletion
+      el.textContent = currentText.substring(0, k - 1);
+      k--;
+      setTimeout(tick, 50);
+    } else {
+      deleting = false;
+      i = (i + 1) % roles.length;
+      setTimeout(tick, 300);
+    }
+  }
+  
+  // Start the animation
+  tick();
+})();
+    // Mobile menu toggle
+    (function menu() {
+      const menuBtn = document.getElementById('menuBtn');
+      const navLinks = document.getElementById('navLinks');
+      
+      menuBtn.addEventListener('click', () => {
+        const open = menuBtn.getAttribute('aria-expanded') === 'true';
+        menuBtn.setAttribute('aria-expanded', String(!open));
+        
+        if (!open) {
+          navLinks.style.display = 'flex';
+          navLinks.style.position = 'fixed';
+          navLinks.style.top = '64px';
+          navLinks.style.right = '12px';
+          navLinks.style.flexDirection = 'column';
+          navLinks.style.background = 'rgba(10, 10, 10, 0.98)';
+          navLinks.style.padding = '1rem';
+          navLinks.style.borderRadius = '12px';
+          navLinks.style.gap = '1rem';
+          navLinks.style.zIndex = '1002';
+        } else {
+          navLinks.removeAttribute('style');
+        }
+      });
+
+      // Close menu when clicking outside (mobile)
+      document.addEventListener('click', (e) => {
+        if (window.innerWidth > 768) return;
+        if (e.target.closest('#navLinks') || e.target.closest('#menuBtn')) return;
+        
+        navLinks.removeAttribute('style');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+    })();
+
+    // Scroll reveal animation
+    (function reveal() {
+      const reveals = document.querySelectorAll('.reveal');
+      const options = { threshold: 0.15 };
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+          }
+        });
+      }, options);
+      
+      reveals.forEach(reveal => observer.observe(reveal));
+    })();
+
+    // Demo placeholder function
+    function openDemo(ev, name) {
+      ev.preventDefault();
+      alert(`${name} — demo placeholder.\nReplace with actual demo URLs or embed players.`);
+    }
+
+    // Accessibility helper
+    (function addSR() {
+      const style = document.createElement('style');
+      style.innerHTML = `
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
+        }
+      `;
+      document.head.appendChild(style);
+    })();
+    
+    // Geometric shapes mouse interaction
+(function geometricShapes() {
+  const shapes = document.querySelectorAll('.shape');
+  const sensitivity = 0.03; // Adjust this value to change how much shapes move
+  
+  document.addEventListener('mousemove', (e) => {
+    const mouseX = e.clientX / window.innerWidth;
+    const mouseY = e.clientY / window.innerHeight;
+    
+    shapes.forEach((shape, index) => {
+      // Each shape reacts slightly differently based on its position
+      const moveX = (mouseX - 0.5) * window.innerWidth * sensitivity * (index + 1);
+      const moveY = (mouseY - 0.5) * window.innerHeight * sensitivity * (index + 1);
+      
+      // Apply the movement with a slight delay for a smoother effect
+      requestAnimationFrame(() => {
+        shape.style.transform = `translate(${moveX}px, ${moveY}px) ${shape.style.transform.split(' ')[2] || ''}`;
+      });
+    });
+  });
+})();
+    
+    // Scroll to top button
+(function scrollToTop() {
+  const scrollBtn = document.createElement('button');
+  scrollBtn.id = 'scrollToTop';
+  scrollBtn.className = 'scroll-top-btn';
+  scrollBtn.setAttribute('aria-label', 'Scroll to top');
+  scrollBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+  document.body.appendChild(scrollBtn);
+
+  // Show/hide button based on scroll position
+  function toggleScrollButton() {
+    if (window.pageYOffset > 300) {
+      scrollBtn.classList.add('visible');
+    } else {
+      scrollBtn.classList.remove('visible');
+    }
+  }
+
+  // Scroll to top function
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  // Event listeners
+  window.addEventListener('scroll', toggleScrollButton);
+  scrollBtn.addEventListener('click', scrollToTop);
+  
+  // Initial check
+  toggleScrollButton();
+})();
+
+  </script>
+</body>
+</html>
